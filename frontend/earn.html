@@ -1,0 +1,66 @@
+<!-- Earn Page Content -->
+<div class="earn-container">
+    <!-- Earn Stats -->
+    <div class="earn-stats glass">
+        <div class="earn-stat-item">
+            <span class="earn-stat-value" id="earnToday">$0.00</span>
+            <span class="earn-stat-label">Today's Earnings</span>
+        </div>
+        <div class="earn-stat-item">
+            <span class="earn-stat-value" id="earnWeek">$0.00</span>
+            <span class="earn-stat-label">This Week</span>
+        </div>
+        <div class="earn-stat-item">
+            <span class="earn-stat-value" id="earnMonth">$0.00</span>
+            <span class="earn-stat-label">This Month</span>
+        </div>
+    </div>
+
+    <!-- Rewarded Ads -->
+    <div class="earn-section">
+        <div class="section-header">
+            <h3>📺 Rewarded Ads</h3>
+            <span class="daily-limit" id="adLimit">0/10</span>
+        </div>
+        <div class="ad-card glass">
+            <div class="ad-info">
+                <span class="ad-reward">+$0.05</span>
+                <span class="ad-duration">⏱️ 30s</span>
+            </div>
+            <button class="watch-btn" id="watchAdBtn">Watch Ad</button>
+        </div>
+        <div class="cooldown-timer" id="cooldownTimer" style="display:none;">
+            Next ad in <span id="cooldownCount">0</span>s
+        </div>
+    </div>
+
+    <!-- Offerwall -->
+    <div class="earn-section">
+        <div class="section-header">
+            <h3>🎯 Offerwall</h3>
+        </div>
+        <div class="offer-container" id="offerContainer">
+            <!-- Offers loaded dynamically -->
+        </div>
+    </div>
+
+    <!-- Daily Tasks -->
+    <div class="earn-section">
+        <div class="section-header">
+            <h3>✅ Daily Tasks</h3>
+        </div>
+        <div class="tasks-container" id="tasksContainer">
+            <!-- Tasks loaded dynamically -->
+        </div>
+    </div>
+
+    <!-- Weekly Missions -->
+    <div class="earn-section">
+        <div class="section-header">
+            <h3>🏆 Weekly Missions</h3>
+        </div>
+        <div class="missions-container" id="missionsContainer">
+            <!-- Missions loaded dynamically -->
+        </div>
+    </div>
+</div>
