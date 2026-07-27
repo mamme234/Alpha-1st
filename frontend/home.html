@@ -1,0 +1,80 @@
+<!-- Home Page Content -->
+<div class="home-container">
+    <!-- Welcome Card -->
+    <div class="welcome-card glass">
+        <div class="welcome-header">
+            <div class="welcome-text">
+                <h2>Welcome back, <span id="welcomeUsername">User</span>!</h2>
+                <p>Level <span id="homeLevel">1</span> · <span id="homeXP">0</span> XP</p>
+            </div>
+            <div class="level-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="levelProgress" style="width:0%"></div>
+                </div>
+            </div>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-value" id="homeBalance">$0.00</span>
+                <span class="stat-label">Wallet</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="homePending">$0.00</span>
+                <span class="stat-label">Pending</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="homeLifetime">$0.00</span>
+                <span class="stat-label">Lifetime</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+        <div class="action-grid">
+            <button class="action-btn" data-action="ads">
+                <span class="action-icon">📺</span>
+                <span class="action-label">Watch Ads</span>
+            </button>
+            <button class="action-btn" data-action="offers">
+                <span class="action-icon">🎯</span>
+                <span class="action-label">Offers</span>
+            </button>
+            <button class="action-btn" data-action="marketplace">
+                <span class="action-icon">🛒</span>
+                <span class="action-label">Marketplace</span>
+            </button>
+            <button class="action-btn" data-action="studio">
+                <span class="action-icon">🎬</span>
+                <span class="action-label">Studio</span>
+            </button>
+            <button class="action-btn" data-action="deposit">
+                <span class="action-icon">💳</span>
+                <span class="action-label">Deposit</span>
+            </button>
+            <button class="action-btn" data-action="withdraw">
+                <span class="action-icon">🏦</span>
+                <span class="action-label">Withdraw</span>
+            </button>
+            <button class="action-btn" data-action="invite">
+                <span class="action-icon">👥</span>
+                <span class="action-label">Invite</span>
+            </button>
+            <button class="action-btn" data-action="spin">
+                <span class="action-icon">🎰</span>
+                <span class="action-label">Lucky Spin</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Trending Feed -->
+    <div class="feed-section">
+        <div class="section-header">
+            <h3>Trending 🔥</h3>
+            <button class="view-all">View All</button>
+        </div>
+        <div class="feed-container" id="feedContainer">
+            <!-- Feed items loaded dynamically -->
+        </div>
+    </div>
+                                                  </div>
