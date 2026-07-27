@@ -1,0 +1,48 @@
+<!-- Referrals Page Content -->
+<div class="referrals-container">
+    <!-- Referral Stats -->
+    <div class="referral-stats glass">
+        <div class="referral-stat-item">
+            <span class="referral-stat-value" id="referralEarnings">$0.00</span>
+            <span class="referral-stat-label">Referral Earnings</span>
+        </div>
+        <div class="referral-stat-item">
+            <span class="referral-stat-value" id="activeReferrals">0</span>
+            <span class="referral-stat-label">Active Referrals</span>
+        </div>
+    </div>
+
+    <!-- Referral Link -->
+    <div class="referral-link-box glass">
+        <h3>Your Referral Link</h3>
+        <div class="link-container">
+            <input type="text" id="referralLink" readonly>
+            <button class="copy-btn" id="copyLinkBtn">📋 Copy</button>
+        </div>
+        <div class="referral-code">
+            <span>Code: </span>
+            <span id="referralCode" class="code-text">ABCDEF</span>
+        </div>
+    </div>
+
+    <!-- QR Code -->
+    <div class="qr-section glass">
+        <h3>Scan to Invite</h3>
+        <div id="qrCodeContainer"></div>
+    </div>
+
+    <!-- Invite Friends -->
+    <button class="invite-btn" id="inviteFriendsBtn">
+        👥 Invite Friends
+    </button>
+
+    <!-- Referral Leaderboard -->
+    <div class="referral-leaderboard">
+        <div class="section-header">
+            <h3>🏆 Top Referrals</h3>
+        </div>
+        <div class="referral-list" id="referralList">
+            <!-- Referral list loaded dynamically -->
+        </div>
+    </div>
+</div>
