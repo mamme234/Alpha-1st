@@ -1,0 +1,45 @@
+<!-- Wallet Page Content -->
+<div class="wallet-container">
+    <!-- Balance Cards -->
+    <div class="balance-card glass">
+        <div class="balance-header">
+            <span class="balance-label">Available Balance</span>
+            <span class="balance-amount" id="availableBalance">$0.00</span>
+        </div>
+        <div class="balance-details">
+            <div class="balance-item">
+                <span>Pending</span>
+                <span id="pendingBalance">$0.00</span>
+            </div>
+            <div class="balance-item">
+                <span>Total Earned</span>
+                <span id="totalEarned">$0.00</span>
+            </div>
+            <div class="balance-item">
+                <span>Total Withdrawn</span>
+                <span id="totalWithdrawn">$0.00</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="wallet-actions">
+        <button class="wallet-action-btn primary" id="depositBtn">
+            <span>💳</span> Deposit
+        </button>
+        <button class="wallet-action-btn secondary" id="withdrawBtn">
+            <span>🏦</span> Withdraw
+        </button>
+    </div>
+
+    <!-- Transactions -->
+    <div class="transactions-section">
+        <div class="section-header">
+            <h3>📊 Transactions</h3>
+            <button class="filter-transactions">Filter</button>
+        </div>
+        <div class="transactions-list" id="transactionsList">
+            <!-- Transactions loaded dynamically -->
+        </div>
+    </div>
+</div>
