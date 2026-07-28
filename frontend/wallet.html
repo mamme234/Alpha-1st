@@ -1,6 +1,10 @@
-<!-- Wallet Page Content -->
+<!-- Wallet Page -->
 <div class="wallet-container">
-    <!-- Balance Cards -->
+    <div class="wallet-header">
+        <h2>💰 Wallet</h2>
+    </div>
+
+    <!-- Balance Card -->
     <div class="balance-card glass">
         <div class="balance-header">
             <span class="balance-label">Available Balance</span>
@@ -22,21 +26,17 @@
         </div>
     </div>
 
-    <!-- Action Buttons -->
+    <!-- Actions -->
     <div class="wallet-actions">
-        <button class="wallet-action-btn primary" id="depositBtn">
-            <span>💳</span> Deposit
-        </button>
-        <button class="wallet-action-btn secondary" id="withdrawBtn">
-            <span>🏦</span> Withdraw
-        </button>
+        <button class="wallet-action-btn primary" id="depositBtn">💳 Deposit</button>
+        <button class="wallet-action-btn secondary" id="withdrawBtn">🏦 Withdraw</button>
     </div>
 
-    <!-- Transactions -->
+    <!-- Transaction History -->
     <div class="transactions-section">
         <div class="section-header">
             <h3>📊 Transactions</h3>
-            <button class="filter-transactions">Filter</button>
+            <button class="filter-btn">Filter</button>
         </div>
         <div class="transactions-list" id="transactionsList">
             <!-- Transactions loaded dynamically -->
