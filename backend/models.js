@@ -7,8 +7,7 @@ const userSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
     avatar: String,
-    bio: { type: String, default: 'Alpha member' },
-    country: String,
+    bio: { type: String, default: 'Super App member' },
     level: { type: Number, default: 1 },
     xp: { type: Number, default: 0 },
     wallet: {
@@ -18,40 +17,33 @@ const userSchema = new mongoose.Schema({
         withdrawn: { type: Number, default: 0 }
     },
     premium: { type: Boolean, default: false },
+    verified: { type: Boolean, default: false },
     isAdmin: { type: Boolean, default: false },
     isCreator: { type: Boolean, default: false },
-    isVerified: { type: Boolean, default: false },
-    banned: { type: Boolean, default: false },
-    referralCode: { type: String, unique: true },
-    referredBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    referrals: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    ratings: [{ type: Number, min: 1, max: 5 }],
     achievements: [String],
     settings: {
         notifications: { type: Boolean, default: true },
-        darkMode: { type: Boolean, default: true },
-        privacy: { type: String, default: 'public' }
+        darkMode: { type: Boolean, default: true }
     },
-    lastActive: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now }
 });
 
-// Content Schema
-const contentSchema = new mongoose.Schema({
+// Video Schema
+const videoSchema = new mongoose.Schema({
     creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    type: { type: String, enum: ['video', 'photo', 'audio', 'document', 'course'], required: true },
     title: { type: String, required: true },
     description: String,
-    fileUrl: String,
-    thumbnailUrl: String,
-    price: { type: Number, default: 0 },
-    isPaid: { type: Boolean, default: false },
-    isPremium: { type: Boolean, default: false },
+    url: String,
+    thumbnail: String,
     views: { type: Number, default: 0 },
-    likes: { type: Number, default: 0 },
+    likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
-    earnings: { type: Number, default: 0 },
+    isPaid: { type: Boolean, default: false },
+    price: { type: Number, default: 0 },
     status: { type: String, enum: ['pending', 'approved', 'rejected'], default: 'pending' },
-    tags: [String],
     createdAt: { type: Date, default: Date.now }
 });
 
@@ -61,7 +53,7 @@ const productSchema = new mongoose.Schema({
     name: { type: String, required: true },
     description: String,
     price: { type: Number, required: true },
-    category: { type: String, enum: ['business', 'ai', 'education', 'design', 'tech', 'entertainment'] },
+    category: { type: String, enum: ['prompts', 'websites', 'bots', 'code', 'logos', 'ui', 'ebooks', 'courses', 'photos', 'videos'] },
     imageUrl: String,
     fileUrl: String,
     downloads: { type: Number, default: 0 },
@@ -70,11 +62,39 @@ const productSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now }
 });
 
+// Job Schema
+const jobSchema = new mongoose.Schema({
+    client: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    title: { type: String, required: true },
+    description: String,
+    budget: { type: Number, required: true },
+    category: { type: String, enum: ['programming', 'design', 'translation', 'writing', 'video', 'marketing'] },
+    status: { type: String, enum: ['open', 'in_progress', 'completed', 'cancelled'], default: 'open' },
+    applicants: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    createdAt: { type: Date, default: Date.now }
+});
+
+// Course Schema
+const courseSchema = new mongoose.Schema({
+    author: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    title: { type: String, required: true },
+    description: String,
+    price: { type: Number, required: true },
+    category: { type: String, enum: ['programming', 'design', 'business', 'marketing', 'ai'] },
+    videos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Video' }],
+    pdfs: [String],
+    quizzes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Quiz' }],
+    students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    rating: { type: Number, default: 0 },
+    status: { type: String, enum: ['draft', 'published', 'archived'], default: 'draft' },
+    createdAt: { type: Date, default: Date.now }
+});
+
 // Transaction Schema
 const transactionSchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     type: { type: String, enum: ['credit', 'debit'] },
-    category: { type: String, enum: ['ad', 'offer', 'referral', 'sale', 'withdraw', 'deposit', 'reward'] },
+    category: { type: String, enum: ['sale', 'purchase', 'withdraw', 'deposit', 'reward', 'tip', 'subscription'] },
     amount: { type: Number, required: true },
     description: String,
     reference: String,
@@ -82,42 +102,13 @@ const transactionSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now }
 });
 
-// Withdrawal Schema
-const withdrawalSchema = new mongoose.Schema({
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    amount: { type: Number, required: true },
-    method: { type: String, enum: ['bank', 'crypto', 'paypal'] },
-    address: String,
-    status: { type: String, enum: ['pending', 'approved', 'completed', 'rejected'], default: 'pending' },
-    processedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    processedAt: Date,
-    createdAt: { type: Date, default: Date.now }
-});
-
-// Ad Schema
-const adSchema = new mongoose.Schema({
-    title: String,
-    type: { type: String, enum: ['rewarded', 'banner', 'sponsored', 'popup'] },
-    reward: { type: Number, default: 0.05 },
-    duration: { type: Number, default: 30 },
-    url: String,
-    imageUrl: String,
-    active: { type: Boolean, default: true },
-    dailyLimit: { type: Number, default: 10 },
-    impressions: { type: Number, default: 0 },
-    clicks: { type: Number, default: 0 },
-    revenue: { type: Number, default: 0 },
-    createdAt: { type: Date, default: Date.now }
-});
-
 // Comment Schema
 const commentSchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     content: { type: String, required: true },
-    targetType: { type: String, enum: ['content', 'product', 'post'] },
+    targetType: { type: String, enum: ['video', 'product', 'course'] },
     targetId: { type: mongoose.Schema.Types.ObjectId, required: true },
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-    replies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
     createdAt: { type: Date, default: Date.now }
 });
 
@@ -138,7 +129,7 @@ const chatSchema = new mongoose.Schema({
 // Notification Schema
 const notificationSchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    type: { type: String, enum: ['earning', 'message', 'withdraw', 'offer', 'promotion', 'system'] },
+    type: { type: String, enum: ['earning', 'message', 'withdraw', 'offer', 'promotion', 'system', 'follow', 'like', 'comment'] },
     title: String,
     message: String,
     read: { type: Boolean, default: false },
@@ -148,22 +139,22 @@ const notificationSchema = new mongoose.Schema({
 
 // Export models
 const User = mongoose.model('User', userSchema);
-const Content = mongoose.model('Content', contentSchema);
+const Video = mongoose.model('Video', videoSchema);
 const Product = mongoose.model('Product', productSchema);
+const Job = mongoose.model('Job', jobSchema);
+const Course = mongoose.model('Course', courseSchema);
 const Transaction = mongoose.model('Transaction', transactionSchema);
-const Withdrawal = mongoose.model('Withdrawal', withdrawalSchema);
-const Ad = mongoose.model('Ad', adSchema);
 const Comment = mongoose.model('Comment', commentSchema);
 const Chat = mongoose.model('Chat', chatSchema);
 const Notification = mongoose.model('Notification', notificationSchema);
 
 module.exports = {
     User,
-    Content,
+    Video,
     Product,
+    Job,
+    Course,
     Transaction,
-    Withdrawal,
-    Ad,
     Comment,
     Chat,
     Notification
