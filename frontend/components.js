@@ -110,7 +110,6 @@ const AlphaComponents = {
             overlay.appendChild(modal);
             document.body.appendChild(overlay);
             
-            // Close on overlay click
             overlay.addEventListener('click', (e) => {
                 if (e.target === overlay) overlay.remove();
             });
@@ -160,58 +159,6 @@ const AlphaComponents = {
         }
     },
 
-    // Form helpers
-    form: {
-        validate(form) {
-            const inputs = form.querySelectorAll('input, textarea, select');
-            let valid = true;
-            
-            inputs.forEach(input => {
-                if (input.hasAttribute('required') && !input.value.trim()) {
-                    valid = false;
-                    input.style.borderColor = '#EF4444';
-                    input.setAttribute('placeholder', 'This field is required');
-                } else {
-                    input.style.borderColor = '';
-                }
-            });
-            
-            return valid;
-        },
-        
-        serialize(form) {
-            const data = {};
-            const inputs = form.querySelectorAll('input, textarea, select');
-            inputs.forEach(input => {
-                if (input.name) {
-                    data[input.name] = input.value;
-                }
-            });
-            return data;
-        }
-    },
-
-    // Animations
-    animate: {
-        fadeIn(element, duration = 300) {
-            element.style.opacity = '0';
-            element.style.transition = `opacity ${duration}ms ease`;
-            requestAnimationFrame(() => {
-                element.style.opacity = '1';
-            });
-        },
-        
-        slideUp(element, duration = 300) {
-            element.style.transform = 'translateY(20px)';
-            element.style.opacity = '0';
-            element.style.transition = `all ${duration}ms ease`;
-            requestAnimationFrame(() => {
-                element.style.transform = 'translateY(0)';
-                element.style.opacity = '1';
-            });
-        }
-    },
-
     // Currency formatter
     currency: (amount) => {
         return new Intl.NumberFormat('en-US', {
@@ -253,7 +200,6 @@ const AlphaComponents = {
             await navigator.clipboard.writeText(text);
             return true;
         } catch (e) {
-            // Fallback
             const textarea = document.createElement('textarea');
             textarea.value = text;
             document.body.appendChild(textarea);
@@ -275,35 +221,17 @@ const AlphaComponents = {
             clearTimeout(timeout);
             timeout = setTimeout(later, wait);
         };
-    },
-
-    // Throttle
-    throttle: (func, limit) => {
-        let inThrottle;
-        return function(...args) {
-            if (!inThrottle) {
-                func.apply(this, args);
-                inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
-            }
-        };
     }
 };
 
-// Add animation keyframes if not present
+// Add animation keyframes
 if (!document.getElementById('alpha-styles')) {
     const style = document.createElement('style');
     style.id = 'alpha-styles';
     style.textContent = `
         @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -316,5 +244,4 @@ if (!document.getElementById('alpha-styles')) {
     document.head.appendChild(style);
 }
 
-// Export for use
 window.AlphaComponents = AlphaComponents;
