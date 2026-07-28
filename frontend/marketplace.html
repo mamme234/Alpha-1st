@@ -1,30 +1,27 @@
-<!-- Marketplace Page Content -->
+<!-- Marketplace Page -->
 <div class="marketplace-container">
-    <!-- Search & Filter -->
-    <div class="marketplace-search">
-        <input type="text" placeholder="Search products..." class="search-input" id="marketplaceSearch">
-        <button class="filter-btn">🔍</button>
+    <div class="marketplace-header">
+        <h2>🛒 Marketplace</h2>
+        <button class="sell-btn" onclick="ALPHA.loadPage('create')">+ Sell</button>
     </div>
 
     <!-- Categories -->
     <div class="categories-scroll">
         <button class="category-btn active" data-category="all">All</button>
-        <button class="category-btn" data-category="business">💼 Business</button>
-        <button class="category-btn" data-category="ai">🤖 AI</button>
-        <button class="category-btn" data-category="education">📚 Education</button>
-        <button class="category-btn" data-category="design">🎨 Design</button>
-        <button class="category-btn" data-category="tech">💻 Technology</button>
-        <button class="category-btn" data-category="entertainment">🎭 Entertainment</button>
+        <button class="category-btn" data-category="prompts">🤖 AI Prompts</button>
+        <button class="category-btn" data-category="websites">🌐 Websites</button>
+        <button class="category-btn" data-category="bots">🤖 Bots</button>
+        <button class="category-btn" data-category="code">💻 Source Code</button>
+        <button class="category-btn" data-category="logos">🎨 Logos</button>
+        <button class="category-btn" data-category="ui">🎨 UI Kits</button>
+        <button class="category-btn" data-category="ebooks">📖 E-books</button>
+        <button class="category-btn" data-category="courses">📚 Courses</button>
+        <button class="category-btn" data-category="photos">📸 Photos</button>
+        <button class="category-btn" data-category="videos">🎬 Videos</button>
     </div>
 
     <!-- Products Grid -->
-    <div class="products-grid" id="productsGrid">
+    <div class="products-grid" id="marketplaceProducts">
         <!-- Products loaded dynamically -->
     </div>
-
-    <!-- Sell Button -->
-    <button class="sell-btn" id="sellBtn">
-        <span class="sell-icon">➕</span>
-        Sell Your Product
-    </button>
 </div>
