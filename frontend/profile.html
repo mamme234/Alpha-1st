@@ -1,4 +1,4 @@
-<!-- Profile Page Content -->
+<!-- Profile Page -->
 <div class="profile-container">
     <!-- Profile Header -->
     <div class="profile-header glass">
@@ -7,31 +7,47 @@
             <button class="edit-avatar">📷</button>
         </div>
         <h2 id="profileUsername">User</h2>
-        <p id="profileBio">Alpha member</p>
+        <p id="profileBio">Super App member</p>
         <div class="profile-badges">
             <span class="badge" id="profileLevel">Level 1</span>
             <span class="badge premium" id="premiumBadge" style="display:none;">⭐ Premium</span>
+            <span class="badge verified" id="verifiedBadge" style="display:none;">✅ Verified</span>
+        </div>
+        <div class="profile-stats">
+            <div class="profile-stat">
+                <span id="profileFollowers">0</span>
+                <span>Followers</span>
+            </div>
+            <div class="profile-stat">
+                <span id="profileFollowing">0</span>
+                <span>Following</span>
+            </div>
+            <div class="profile-stat">
+                <span id="profileRatings">0</span>
+                <span>Ratings</span>
+            </div>
         </div>
     </div>
 
-    <!-- Profile Stats -->
-    <div class="profile-stats">
-        <div class="profile-stat">
-            <span id="profileXP">0</span>
-            <span>XP</span>
-        </div>
-        <div class="profile-stat">
-            <span id="profileAchievements">0</span>
-            <span>Achievements</span>
-        </div>
-        <div class="profile-stat">
-            <span id="profileCountry">🌍</span>
-            <span>Country</span>
-        </div>
+    <!-- Tabs -->
+    <div class="profile-tabs">
+        <button class="profile-tab active" data-tab="content">Content</button>
+        <button class="profile-tab" data-tab="products">Products</button>
+        <button class="profile-tab" data-tab="courses">Courses</button>
+        <button class="profile-tab" data-tab="achievements">🏆 Achievements</button>
+    </div>
+
+    <!-- Content Grid -->
+    <div class="profile-content-grid" id="profileContent">
+        <!-- Content loaded dynamically -->
     </div>
 
     <!-- Settings -->
     <div class="settings-section">
+        <div class="settings-item" onclick="ALPHA.loadPage('premium')">
+            <span>💎 Premium</span>
+            <span class="settings-arrow">›</span>
+        </div>
         <div class="settings-item">
             <span>🔔 Notifications</span>
             <label class="toggle-switch">
@@ -46,21 +62,9 @@
                 <span class="slider"></span>
             </label>
         </div>
-        <div class="settings-item">
-            <span>🔒 Privacy</span>
-            <span class="settings-arrow">›</span>
-        </div>
-        <div class="settings-item">
-            <span>💎 Premium</span>
-            <span class="settings-arrow">›</span>
-        </div>
-        <div class="settings-item">
-            <span>❓ Help & Support</span>
-            <span class="settings-arrow">›</span>
-        </div>
         <div class="settings-item logout">
             <span>🚪 Logout</span>
             <span class="settings-arrow">›</span>
         </div>
     </div>
-  </div>
+    </div>
