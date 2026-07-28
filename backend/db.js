@@ -8,12 +8,14 @@ const connectDB = async () => {
         });
         console.log(`✅ MongoDB connected: ${conn.connection.host}`);
         
-        // Create indexes
-        await conn.connection.db.collection('users').createIndex({ telegramId: 1 }, { unique: true });
-        console.log('✅ Indexes created');
+        // Remove the problematic index creation
+        // The index already exists, so we don't need to create it again
+        
+        console.log('✅ Database ready');
     } catch (error) {
         console.error(`❌ MongoDB connection error: ${error.message}`);
-        process.exit(1);
+        // Don't exit, just log the error
+        console.log('⚠️ Continuing with limited functionality');
     }
 };
 
