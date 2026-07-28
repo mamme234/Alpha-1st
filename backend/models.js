@@ -40,10 +40,14 @@ const videoSchema = new mongoose.Schema({
     thumbnail: String,
     views: { type: Number, default: 0 },
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
+    comments: [{ 
+        user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+        text: String,
+        createdAt: { type: Date, default: Date.now }
+    }],
     isPaid: { type: Boolean, default: false },
     price: { type: Number, default: 0 },
-    status: { type: String, enum: ['pending', 'approved', 'rejected'], default: 'pending' },
+    status: { type: String, enum: ['pending', 'approved', 'rejected', 'published'], default: 'published' },
     createdAt: { type: Date, default: Date.now }
 });
 
@@ -58,7 +62,7 @@ const productSchema = new mongoose.Schema({
     fileUrl: String,
     downloads: { type: Number, default: 0 },
     featured: { type: Boolean, default: false },
-    status: { type: String, enum: ['pending', 'approved', 'rejected'], default: 'pending' },
+    status: { type: String, enum: ['pending', 'approved', 'rejected', 'published'], default: 'published' },
     createdAt: { type: Date, default: Date.now }
 });
 
@@ -81,12 +85,21 @@ const courseSchema = new mongoose.Schema({
     description: String,
     price: { type: Number, required: true },
     category: { type: String, enum: ['programming', 'design', 'business', 'marketing', 'ai'] },
-    videos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Video' }],
+    videos: [{ 
+        title: String,
+        url: String,
+        duration: Number
+    }],
     pdfs: [String],
-    quizzes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Quiz' }],
     students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     rating: { type: Number, default: 0 },
-    status: { type: String, enum: ['draft', 'published', 'archived'], default: 'draft' },
+    reviews: [{ 
+        user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+        rating: Number,
+        comment: String,
+        createdAt: { type: Date, default: Date.now }
+    }],
+    status: { type: String, enum: ['draft', 'published', 'archived'], default: 'published' },
     createdAt: { type: Date, default: Date.now }
 });
 
@@ -99,16 +112,6 @@ const transactionSchema = new mongoose.Schema({
     description: String,
     reference: String,
     status: { type: String, enum: ['pending', 'completed', 'failed'], default: 'completed' },
-    createdAt: { type: Date, default: Date.now }
-});
-
-// Comment Schema
-const commentSchema = new mongoose.Schema({
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    content: { type: String, required: true },
-    targetType: { type: String, enum: ['video', 'product', 'course'] },
-    targetId: { type: mongoose.Schema.Types.ObjectId, required: true },
-    likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     createdAt: { type: Date, default: Date.now }
 });
 
@@ -137,25 +140,26 @@ const notificationSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now }
 });
 
-// Export models
-const User = mongoose.model('User', userSchema);
-const Video = mongoose.model('Video', videoSchema);
-const Product = mongoose.model('Product', productSchema);
-const Job = mongoose.model('Job', jobSchema);
-const Course = mongoose.model('Course', courseSchema);
-const Transaction = mongoose.model('Transaction', transactionSchema);
-const Comment = mongoose.model('Comment', commentSchema);
-const Chat = mongoose.model('Chat', chatSchema);
-const Notification = mongoose.model('Notification', notificationSchema);
+// AI Chat Schema
+const aiChatSchema = new mongoose.Schema({
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    messages: [{
+        role: { type: String, enum: ['user', 'assistant', 'system'] },
+        content: String,
+        createdAt: { type: Date, default: Date.now }
+    }],
+    createdAt: { type: Date, default: Date.now }
+});
 
+// Export models
 module.exports = {
-    User,
-    Video,
-    Product,
-    Job,
-    Course,
-    Transaction,
-    Comment,
-    Chat,
-    Notification
+    User: mongoose.model('User', userSchema),
+    Video: mongoose.model('Video', videoSchema),
+    Product: mongoose.model('Product', productSchema),
+    Job: mongoose.model('Job', jobSchema),
+    Course: mongoose.model('Course', courseSchema),
+    Transaction: mongoose.model('Transaction', transactionSchema),
+    Chat: mongoose.model('Chat', chatSchema),
+    Notification: mongoose.model('Notification', notificationSchema),
+    AIChat: mongoose.model('AIChat', aiChatSchema)
 };
