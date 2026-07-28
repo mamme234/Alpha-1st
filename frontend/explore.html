@@ -1,0 +1,78 @@
+<!-- Explore Page -->
+<div class="explore-container">
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <input type="text" id="globalSearch" placeholder="Search everything..." class="search-input">
+        <button class="search-btn">🔍</button>
+    </div>
+
+    <!-- Search Filters -->
+    <div class="search-filters">
+        <button class="filter-chip active" data-filter="all">All</button>
+        <button class="filter-chip" data-filter="videos">🎬 Videos</button>
+        <button class="filter-chip" data-filter="products">🛒 Products</button>
+        <button class="filter-chip" data-filter="creators">⭐ Creators</button>
+        <button class="filter-chip" data-filter="freelancers">💼 Freelancers</button>
+        <button class="filter-chip" data-filter="courses">📚 Courses</button>
+        <button class="filter-chip" data-filter="prompts">🤖 AI Prompts</button>
+        <button class="filter-chip" data-filter="bots">🤖 Bots</button>
+        <button class="filter-chip" data-filter="websites">🌐 Websites</button>
+    </div>
+
+    <!-- Results -->
+    <div class="search-results" id="searchResults">
+        <div class="result-item" onclick="ALPHA.loadPage('videos')">
+            <span>🎬</span>
+            <div>
+                <h4>Top Trending Videos</h4>
+                <p>Watch the most popular content</p>
+            </div>
+            <span>→</span>
+        </div>
+        <div class="result-item" onclick="ALPHA.loadPage('marketplace')">
+            <span>🛒</span>
+            <div>
+                <h4>Marketplace</h4>
+                <p>Buy & sell digital products</p>
+            </div>
+            <span>→</span>
+        </div>
+        <div class="result-item" onclick="ALPHA.loadPage('freelance')">
+            <span>💼</span>
+            <div>
+                <h4>Freelance Jobs</h4>
+                <p>Find work or hire talent</p>
+            </div>
+            <span>→</span>
+        </div>
+        <div class="result-item" onclick="ALPHA.loadPage('courses')">
+            <span>📚</span>
+            <div>
+                <h4>Courses</h4>
+                <p>Learn new skills</p>
+            </div>
+            <span>→</span>
+        </div>
+        <div class="result-item" onclick="ALPHA.loadPage('ai-assistant')">
+            <span>🤖</span>
+            <div>
+                <h4>AI Assistant</h4>
+                <p>Get help with anything</p>
+            </div>
+            <span>→</span>
+        </div>
+    </div>
+
+    <!-- Trending Categories -->
+    <div class="trending-categories">
+        <h3>🔥 Trending Now</h3>
+        <div class="trending-tags">
+            <span>#AIPrompts</span>
+            <span>#TelegramBots</span>
+            <span>#WebDevelopment</span>
+            <span>#UIDesign</span>
+            <span>#Coding</span>
+            <span>#Marketing</span>
+        </div>
+    </div>
+</div>
