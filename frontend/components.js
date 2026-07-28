@@ -1,6 +1,5 @@
 // ===== REUSABLE COMPONENTS =====
 const AlphaComponents = {
-    // Toast system
     toast: {
         show(message, type = 'info', duration = 3000) {
             const existing = document.querySelector('.alpha-toast');
@@ -9,7 +8,7 @@ const AlphaComponents = {
             const toast = document.createElement('div');
             toast.className = 'alpha-toast';
             const colors = {
-                info: 'var(--blue)',
+                info: '#3B82F6',
                 success: '#10B981',
                 error: '#EF4444',
                 warning: '#F59E0B'
@@ -51,7 +50,6 @@ const AlphaComponents = {
         }
     },
 
-    // Modal system
     modal: {
         open(title, content, actions = []) {
             const existing = document.querySelector('.alpha-modal-overlay');
@@ -90,13 +88,13 @@ const AlphaComponents = {
             
             let actionsHtml = actions.map(action => `
                 <button onclick="(${action.onClick.toString()})()" 
-                        style="padding:10px 20px;background:${action.color || 'var(--gold)'};border:none;border-radius:10px;color:${action.textColor || '#0A0A0A'};font-weight:600;cursor:pointer;font-family:'Urbanist',sans-serif;">
+                        style="padding:10px 20px;background:${action.color || '#D4AF37'};border:none;border-radius:10px;color:${action.textColor || '#0A0A0A'};font-weight:600;cursor:pointer;font-family:'Urbanist',sans-serif;">
                     ${action.label}
                 </button>
             `).join('');
             
             modal.innerHTML = `
-                <h3 style="font-size:18px;font-weight:700;margin-bottom:12px;">${title}</h3>
+                <h3 style="font-size:18px;font-weight:700;margin-bottom:12px;color:var(--text-primary);">${title}</h3>
                 <div style="color:var(--text-secondary);margin-bottom:16px;">${content}</div>
                 <div style="display:flex;gap:8px;justify-content:flex-end;">
                     ${actionsHtml}
@@ -121,45 +119,6 @@ const AlphaComponents = {
         }
     },
 
-    // Loading spinner
-    loader: {
-        show(message = 'Loading...') {
-            const existing = document.querySelector('.alpha-loader');
-            if (existing) existing.remove();
-            
-            const loader = document.createElement('div');
-            loader.className = 'alpha-loader';
-            Object.assign(loader.style, {
-                position: 'fixed',
-                top: '0',
-                left: '0',
-                right: '0',
-                bottom: '0',
-                background: 'rgba(0,0,0,0.7)',
-                backdropFilter: 'blur(8px)',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                zIndex: '9999',
-                gap: '16px'
-            });
-            
-            loader.innerHTML = `
-                <div style="width:40px;height:40px;border:3px solid rgba(212,175,55,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;"></div>
-                <span style="color:var(--text-primary);font-weight:500;">${message}</span>
-            `;
-            
-            document.body.appendChild(loader);
-        },
-        
-        hide() {
-            const existing = document.querySelector('.alpha-loader');
-            if (existing) existing.remove();
-        }
-    },
-
-    // Currency formatter
     currency: (amount) => {
         return new Intl.NumberFormat('en-US', {
             style: 'currency',
@@ -168,7 +127,6 @@ const AlphaComponents = {
         }).format(amount);
     },
 
-    // Time formatter
     timeAgo: (date) => {
         const seconds = Math.floor((new Date() - new Date(date)) / 1000);
         const intervals = {
@@ -189,12 +147,10 @@ const AlphaComponents = {
         return 'Just now';
     },
 
-    // Generate random ID
     generateId: () => {
         return Math.random().toString(36).substring(2) + Date.now().toString(36);
     },
 
-    // Copy to clipboard
     copyToClipboard: async (text) => {
         try {
             await navigator.clipboard.writeText(text);
@@ -210,7 +166,6 @@ const AlphaComponents = {
         }
     },
 
-    // Debounce
     debounce: (func, wait) => {
         let timeout;
         return function executedFunction(...args) {
@@ -240,8 +195,13 @@ if (!document.getElementById('alpha-styles')) {
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     `;
     document.head.appendChild(style);
 }
 
 window.AlphaComponents = AlphaComponents;
+console.log('✅ AlphaComponents loaded');
