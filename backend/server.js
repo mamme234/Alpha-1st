@@ -13,7 +13,7 @@ const { connectDB } = require('./db');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Security middleware
+// Security
 app.use(helmet());
 app.use(cors({
     origin: process.env.FRONTEND_URL || '*',
@@ -23,9 +23,9 @@ app.use(compression());
 
 // Rate limiting
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // limit each IP to 100 requests per windowMs
-    message: 'Too many requests from this IP, please try again later.'
+    windowMs: 15 * 60 * 1000,
+    max: 100,
+    message: 'Too many requests, please try again later.'
 });
 app.use('/api/', limiter);
 
@@ -36,7 +36,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // Static files
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Database connection
+// Database
 connectDB();
 
 // Routes
@@ -50,10 +50,8 @@ app.get('/health', (req, res) => {
 // Error handler
 app.use(errorHandler);
 
-// Start server
 app.listen(PORT, () => {
-    console.log(`🚀 Alpha server running on port ${PORT}`);
-    console.log(`📡 Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`🚀 ALPHA Super App running on port ${PORT}`);
 });
 
 module.exports = app;
